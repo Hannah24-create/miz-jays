@@ -3,6 +3,11 @@ const dotenv = require('dotenv')
 const cors = require('cors')
 const connectedDB = require('./config/db')
 const serviceRoutes = require('./routes/serviceRoutes')
+const productRoutes = require('./routes/productRoutes')
+const portfolioRoutes = require('./routes/portfolioRoutes')
+
+
+
 
 dotenv.config()
 
@@ -15,7 +20,10 @@ app.use(express.json())
 
 
 const PORT = process.env.PORT || 5000
+
 app.use('/api/services', serviceRoutes)
+app.use('/api/products', productRoutes)
+app.use('/api/portfolio', portfolioRoutes)
 
 
 app.get('/', (req, res) => {
