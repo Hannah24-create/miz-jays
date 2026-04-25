@@ -1,0 +1,143 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  border-bottom: 2px solid #e91e8c;
+}
+
+.app.light .navbar {
+  background-color: #fafafa;
+}
+
+.app.dark .navbar {
+  background-color: #1a1a1a;
+}
+
+.navbar-logo h1 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.app.light .navbar-logo h1 {
+  color: #1a1a1a;
+}
+
+.app.dark .navbar-logo h1 {
+  color: #ffffff;
+}
+
+.navbar-logo h1 span {
+  color: #e91e8c;
+}
+
+.navbar-logo p {
+  font-size: 0.7rem;
+  color: #c9a84c;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.app.light .navbar-links a {
+  color: #1a1a1a;
+}
+
+.app.dark .navbar-links a {
+  color: #ffffff;
+}
+
+.navbar-links a:hover {
+  color: #e91e8c;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.theme-toggle {
+  background: transparent;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.contact-btn {
+  background-color: #e91e8c;
+  color: #ffffff;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.contact-btn:hover {
+  background-color: #c9a84c;
+}
+
+.navbar-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+}
+
+.navbar-toggle span {
+  width: 25px;
+  height: 3px;
+  background-color: #e91e8c;
+  border-radius: 3px;
+}
+
+@media (max-width: 768px) {
+  .navbar-toggle {
+    display: flex;
+  }
+
+  .navbar-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    padding: 1rem 2rem;
+    gap: 1.5rem;
+    z-index: 99;
+  }
+
+  .app.light .navbar-links {
+    background-color: #fafafa;
+  }
+
+  .app.dark .navbar-links {
+    background-color: #1a1a1a;
+  }
+
+  .navbar-links.active {
+    display: flex;
+  }
+
+  .navbar-right {
+    display: none;
+  }
+}
