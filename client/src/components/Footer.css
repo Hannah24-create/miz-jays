@@ -1,0 +1,96 @@
+.footer1 {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Fills the viewport height */
+  margin: 0;
+}
+
+.footer {
+  margin-top: auto; /* Pushes the footer to the bottom */
+  padding: 1.5rem 2rem;
+}
+
+.app.light .footer {
+  background-color: #fafafa;
+  color: #1a1a1a;
+}
+
+.app.dark .footer {
+  background-color: #1a1a1a;
+  color: #ffffff;
+}
+
+.footer-logo h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.app.light .footer-logo h2 {
+  color: #1a1a1a;
+}
+
+.app.dark .footer-logo h2 {
+  color: #ffffff;
+}
+
+.footer-logo h2 span {
+  color: #e91e8c;
+}
+
+.footer-logo p {
+  font-size: 0.7rem;
+  color: #c9a84c;
+  margin: 0;
+  letter-spacing: 2px;
+}
+
+.footer-socials {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-socials a {
+  text-decoration: none;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
+
+.app.light .footer-socials a {
+  color: #1a1a1a;
+}
+
+.app.dark .footer-socials a {
+  color: #ffffff;
+}
+
+.footer-socials a:hover {
+  color: #e91e8c;
+}
+
+.footer-copy {
+  text-align: right;
+}
+
+.footer-copy p {
+  font-size: 0.8rem;
+  margin: 0;
+}
+
+.footer-tag {
+  color: #c9a84c;
+  letter-spacing: 2px;
+  font-size: 0.7rem !important;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    gap: 1.5rem;
+    text-align: center;
+  }
+
+  .footer-copy {
+    text-align: center;
+  }
+}
