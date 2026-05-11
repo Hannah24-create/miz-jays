@@ -1,0 +1,100 @@
+.service-detail {
+  padding: 4rem 2rem;
+  min-height: 100vh;
+}
+
+.service-detail-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  align-items: start;
+}
+
+.service-detail-img {
+  width: 100%;
+  height: 400px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.service-detail-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.service-detail-placeholder {
+  width: 100%;
+  height: 100%;
+  background-color: #e91e8c22;
+  border-radius: 12px;
+}
+
+.service-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.service-detail-category {
+  color: #c9a84c;
+  font-size: 0.85rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.service-detail-name {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.app.light .service-detail-name {
+  color: #1a1a1a;
+}
+
+.app.dark .service-detail-name {
+  color: #ffffff;
+}
+
+.service-detail-price {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: #e91e8c;
+}
+
+.service-detail-description {
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.app.light .service-detail-description {
+  color: #555555;
+}
+
+.app.dark .service-detail-description {
+  color: #cccccc;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 1rem;
+  color: #e91e8c;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  color: #c9a84c;
+}
+
+@media (max-width: 768px) {
+  .service-detail-container {
+    grid-template-columns: 1fr;
+  }
+
+  .service-detail-img {
+    height: 250px;
+  }
+}

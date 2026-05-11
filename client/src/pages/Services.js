@@ -1,10 +1,65 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
+import axios from 'axios'
+import './Services.css'
 
 function Services() {
+    const [services, setServices] = useState([])
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        const fetchServices = async () => {
+            try {
+                const response = await axios.get('http://localhost:5000/api/services')
+                setServices(response.data)
+                setLoading(false)
+            } catch (error) {
+                console.log(error)
+                setLoading(false)
+            }
+        }
+        fetchServices()
+    }, [])
+
+    if (loading) {
+        return (
+            <div className='loading'>
+                <p>Loading services...</p>
+            </div>
+        )
+    }
+
     return (
-        <div>
-            <h1>Services Page</h1>
-            <p>At Miz Jays, we offer a range of beauty services designed to enhance your natural beauty and boost your confidence. Our team of skilled professionals is dedicated to providing personalized beauty experiences that cater to your unique style and preferences. Whether you're looking for a glamorous makeup application for a special occasion, a rejuvenating skincare treatment, or expert advice on the latest beauty trends, Miz Jays has you covered. We pride ourselves on using high-quality products and innovative techniques to ensure you leave our salon feeling beautiful and empowered. Join us at Miz Jays and let us help you express your inner beauty with our exceptional services!</p>
+        <div className='services'>
+            <div className='services-header'>
+                <div className='section-divider'></div>
+                <h2>Our <span>Services</span></h2>
+                <p>Professional beauty services delivered with precision and care</p>
+            </div>
+
+            <div className='services-grid'>
+                {services.map((service) => (
+                    <div className='service-card' key={service._id}>
+                        <div className='service-card-img'>
+                            {service.image ? (
+                                <img src={service.image} alt={service.name} />
+                            ) : (
+                                <div className='service-card-placeholder'></div>
+                            )}
+                        </div>
+                        <div className='service-card-body'>
+                            <h3>{service.name}</h3>
+                            <p>{service.description}</p>
+                            <Link
+                                to={`/services/${service._id}`}
+                                className='service-btn'
+                            >
+                                View Details
+                            </Link>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }
