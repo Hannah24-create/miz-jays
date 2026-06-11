@@ -1,6 +1,7 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const cors = require('cors')
+const path = require('path')
 const connectedDB = require('./config/db')
 const serviceRoutes = require('./routes/serviceRoutes')
 const productRoutes = require('./routes/productRoutes')
@@ -17,6 +18,7 @@ const app = express()
 
 app.use(cors())
 app.use(express.json())
+app.use('/uploads', express.static(path.join(__dirname, 'public', 'uploads')))
 
 
 const PORT = process.env.PORT || 5000

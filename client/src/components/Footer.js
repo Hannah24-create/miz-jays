@@ -1,16 +1,19 @@
 import React from 'react'
 import { AiOutlineInstagram } from 'react-icons/ai'
 import { FaTiktok, FaSnapchatGhost } from 'react-icons/fa'
+import logo from '../assets/logo.png'
 import './Footer.css'
 
 function Footer() {
     return (
-        <footer className='footer1'>
         <footer className='footer'>
 
             <div className='footer-logo'>
-                <h2>Miz <span>Jays</span></h2>
-                <p>beauty with class...</p>
+                <img
+                    src={logo}
+                    alt='Miz Jays'
+                    className='footer-logo-img'
+                />
             </div>
 
             <div className='footer-socials'>
@@ -42,8 +45,7 @@ function Footer() {
                 <p className='footer-tag'>beauty with class...</p>
             </div>
 
-            </footer>
-            </footer>
+        </footer>
     )
 }
 

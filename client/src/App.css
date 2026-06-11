@@ -11,14 +11,22 @@ body {
     color 0.3s ease;
 }
 
+.main-content {
+  flex: 1;
+}
+
 .app.light {
-  background-color: white;
+  background-color: #fafafa;
   color: #1a1a1a;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .app.dark {
-  background-color: #1a1a1a;
+  background-color: #2d2d2d;
   color: #ffffff;
   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }

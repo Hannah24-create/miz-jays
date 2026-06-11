@@ -38,11 +38,16 @@ function Services() {
             </div>
 
             <div className='services-grid'>
-                {services.map((service) => (
+                {services.map((service) => {
+                    // Construct full URL for image if it's a relative path
+                    const imageUrl = service.image?.startsWith('http') 
+                        ? service.image 
+                        : `http://localhost:5000${service.image}`
+                    return (
                     <div className='service-card' key={service._id}>
                         <div className='service-card-img'>
                             {service.image ? (
-                                <img src={service.image} alt={service.name} />
+                                <img src={imageUrl} alt={service.name} />
                             ) : (
                                 <div className='service-card-placeholder'></div>
                             )}
@@ -58,7 +63,8 @@ function Services() {
                             </Link>
                         </div>
                     </div>
-                ))}
+                    )
+                })}
             </div>
         </div>
     )

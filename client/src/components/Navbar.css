@@ -14,32 +14,14 @@
 }
 
 .app.dark .navbar {
-  background-color: #1a1a1a;
+  background-color: #2d2d2d;
 }
 
-.navbar-logo h1 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.app.light .navbar-logo h1 {
-  color: #1a1a1a;
-}
-
-.app.dark .navbar-logo h1 {
-  color: #ffffff;
-}
-
-.navbar-logo h1 span {
-  color: #e91e8c;
-}
-
-.navbar-logo p {
-  font-size: 0.7rem;
-  color: #c9a84c;
-  margin: 0;
-  letter-spacing: 2px;
+.navbar-logo-img {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+  display: block;
 }
 
 .navbar-links {
@@ -72,11 +54,21 @@
   gap: 1rem;
 }
 
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
 .theme-toggle {
   background: transparent;
   border: none;
   font-size: 1.3rem;
   cursor: pointer;
+  color: #ffc012;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .contact-btn {
@@ -113,6 +105,10 @@
     display: flex;
   }
 
+  .contact-btn {
+    display: none;
+  }
+
   .navbar-links {
     display: none;
     flex-direction: column;
@@ -123,6 +119,7 @@
     padding: 1rem 2rem;
     gap: 1.5rem;
     z-index: 99;
+    border-bottom: 2px solid #e91e8c;
   }
 
   .app.light .navbar-links {
@@ -130,14 +127,10 @@
   }
 
   .app.dark .navbar-links {
-    background-color: #1a1a1a;
+    background-color: #2d2d2d;
   }
 
   .navbar-links.active {
     display: flex;
-  }
-
-  .navbar-right {
-    display: none;
   }
 }

@@ -9,6 +9,17 @@ const getAllPortfolio = async (req, res) => {
     }
 }
 
+const getPortfolioBySection = async (req, res) => {
+    try {
+        const portfolio = await Portfolio.find({ 
+            section: req.params.section 
+        })
+        res.json(portfolio)
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+}
+
 const addPortfolio = async (req, res) => {
     try {
         const portfolio = await Portfolio.create(req.body)
@@ -31,4 +42,9 @@ const deletePortfolio = async (req, res) => {
     }
 }
 
-module.exports = { getAllPortfolio, addPortfolio, deletePortfolio }
+module.exports = { 
+    getAllPortfolio, 
+    getPortfolioBySection,
+    addPortfolio, 
+    deletePortfolio 
+}

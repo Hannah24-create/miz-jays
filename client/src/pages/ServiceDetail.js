@@ -47,7 +47,12 @@ function ServiceDetail() {
 
                 <div className='service-detail-img'>
                     {service.image ? (
-                        <img src={service.image} alt={service.name} />
+                        <img 
+                            src={service.image?.startsWith('http') 
+                                ? service.image 
+                                : `http://localhost:5000${service.image}`}
+                            alt={service.name} 
+                        />
                     ) : (
                         <div className='service-detail-placeholder'></div>
                     )}
