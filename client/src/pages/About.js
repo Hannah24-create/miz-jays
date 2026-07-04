@@ -51,7 +51,7 @@ function About() {
                     </div>
 
                     <a
-                        href='https://wa.me/233559912316?text=Hi Miz Jays! I would like to know more about your services 😊'
+                        href='https://wa.me/233559912316?text=Hi Miz Jays! I would like to know more about your services'
                         target='_blank'
                         rel='noreferrer'
                         className='btn-primary'

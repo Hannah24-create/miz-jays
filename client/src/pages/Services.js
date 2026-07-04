@@ -39,7 +39,7 @@ function Services() {
 
             <div className='services-grid'>
                 {services.map((service) => {
-                    // Construct full URL for image if it's a relative path
+                 
                     const imageUrl = service.image?.startsWith('http') 
                         ? service.image 
                         : `http://localhost:5000${service.image}`

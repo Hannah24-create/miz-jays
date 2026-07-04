@@ -26,7 +26,7 @@ function Home() {
     return (
         <div className='home'>
 
-            {/* HERO SECTION */}
+            
             <div className='hero'>
                 <div className='hero-overlay'></div>
                 <div className='hero-content'>
@@ -46,7 +46,7 @@ function Home() {
                     </p>
                     <div className='hero-buttons'>
                         <a
-                            href='https://wa.me/233559912316?text=Hi Miz Jays! I would like to book an appointment 😊'
+                            href='https://wa.me/233559912316?text=Hi Miz Jays! I would like to book an appointment'
                             target='_blank'
                             rel='noreferrer'
                             className='btn-primary'
@@ -60,7 +60,7 @@ function Home() {
                 </div>
             </div>
 
-            {/* SERVICES PREVIEW SECTION */}
+            
             <div className='home-section'>
                 <div
                     className='home-section-header'
@@ -104,7 +104,7 @@ function Home() {
                 </div>
             </div>
 
-            {/* ABOUT PREVIEW SECTION */}
+          
             <div className='home-about'>
                 <div
         className='home-about-left'
@@ -179,7 +179,7 @@ function Home() {
     </div>
             </div>
 
-            {/* GET IN TOUCH SECTION */} 
+          
             <div
                 className='home-cta'
                 data-aos='zoom-in'
@@ -190,7 +190,7 @@ function Home() {
                     beauty with class at Miz Jays
                 </p>
                 <a
-                    href='https://wa.me/233559912316?text=Hi Miz Jays! I would like to book an appointment 😊'
+                    href='https://wa.me/233559912316?text=Hi Miz Jays! I would like to book an appointment'
                     target='_blank'
                     rel='noreferrer'
                     className='btn-primary'

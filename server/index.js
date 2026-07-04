@@ -6,6 +6,7 @@ const connectedDB = require('./config/db')
 const serviceRoutes = require('./routes/serviceRoutes')
 const productRoutes = require('./routes/productRoutes')
 const portfolioRoutes = require('./routes/portfolioRoutes')
+const authRoutes = require('./routes/authRoutes')
 
 
 
@@ -26,6 +27,7 @@ const PORT = process.env.PORT || 5000
 app.use('/api/services', serviceRoutes)
 app.use('/api/products', productRoutes)
 app.use('/api/portfolio', portfolioRoutes)
+app.use('/api/auth', authRoutes)
 
 
 app.get('/', (req, res) => {
