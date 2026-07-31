@@ -6,10 +6,11 @@ const {
     addPortfolio, 
     deletePortfolio 
 } = require('../controllers/portfolioController')
+const protect = require('../middleware/authMiddleware')
 
 router.get('/', getAllPortfolio)
 router.get('/section/:section', getPortfolioBySection)
-router.post('/', addPortfolio)
-router.delete('/:id', deletePortfolio)
+router.post('/', protect, addPortfolio)
+router.delete('/:id', protect, deletePortfolio)
 
 module.exports = router

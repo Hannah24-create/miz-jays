@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
 import axios from 'axios'
+import { getApiUrl, getAssetUrl } from '../config/api'
 import './ServiceDetail.css'
 
 function ServiceDetail() {
@@ -12,7 +13,7 @@ function ServiceDetail() {
     useEffect(() => {
         const fetchService = async () => {
             try {
-                const response = await axios.get(`http://localhost:5000/api/services/${id}`)
+                const response = await axios.get(getApiUrl(`/api/services/${id}`))
                 console.log(response.data)
                 setService(response.data)
                 setLoading(false)
@@ -48,9 +49,7 @@ function ServiceDetail() {
                 <div className='service-detail-img'>
                     {service.image ? (
                         <img 
-                            src={service.image?.startsWith('http') 
-                                ? service.image 
-                                : `http://localhost:5000${service.image}`}
+                            src={getAssetUrl(service.image)}
                             alt={service.name} 
                         />
                     ) : (

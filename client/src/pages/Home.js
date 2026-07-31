@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import AOS from 'aos'
+import { getApiUrl } from '../config/api'
 import { MdOutlineContentCut } from 'react-icons/md'
 import { BsCalendarCheck, BsEmojiSmile } from 'react-icons/bs'
 import { BiHome } from 'react-icons/bi'
@@ -14,7 +15,7 @@ function Home() {
         AOS.refresh()
         const fetchServices = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/services')
+                const response = await axios.get(getApiUrl('/api/services'))
                 setServices(response.data.slice(0, 3))
             } catch (error) {
                 console.log(error)

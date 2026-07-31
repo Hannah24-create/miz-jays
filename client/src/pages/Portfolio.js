@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
+import { getApiUrl } from '../config/api'
 import './Portfolio.css'
 
 function Portfolio() {
@@ -9,7 +10,7 @@ function Portfolio() {
     useEffect(() => {
         const fetchVideos = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/portfolio')
+                const response = await axios.get(getApiUrl('/api/portfolio'))
                 setVideos(response.data)
                 setLoading(false)
             } catch (error) {

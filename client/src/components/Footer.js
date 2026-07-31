@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import { AiOutlineInstagram } from 'react-icons/ai'
 import { FaTiktok, FaSnapchatGhost } from 'react-icons/fa'
 import logo from '../assets/logo.png'
@@ -7,15 +8,13 @@ import './Footer.css'
 function Footer() {
     return (
         <footer className='footer'>
-
-            <div className='footer-logo'>
+                <Link to='/'>
                 <img
                     src={logo}
                     alt='Miz Jays'
-                    className='footer-logo-img'
+                    className='navbar-logo-img'
                 />
-            </div>
-
+            </Link>
             <div className='footer-socials'>
                 <a
                     href='https://www.instagram.com/your_instagram_handle'

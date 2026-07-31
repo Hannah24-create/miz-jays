@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { getApiUrl } from '../config/api'
+import AdminLayout from '../components/AdminLayout'
 import './Admin.css'
 
 function AdminServices() {
@@ -27,7 +29,7 @@ function AdminServices() {
 
     const fetchServices = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/services')
+            const response = await axios.get(getApiUrl('/api/services'))
             setServices(response.data)
             setLoading(false)
         } catch (error) {
@@ -52,13 +54,13 @@ function AdminServices() {
 
             if (editingService) {
                 await axios.put(
-                    `http://localhost:5000/api/services/${editingService._id}`,
+                    getApiUrl(`/api/services/${editingService._id}`),
                     formData,
                     { headers }
                 )
             } else {
                 await axios.post(
-                    'http://localhost:5000/api/services',
+                    getApiUrl('/api/services'),
                     formData,
                     { headers }
                 )
@@ -96,7 +98,7 @@ function AdminServices() {
             try {
                 const token = getToken()
                 await axios.delete(
-                    `http://localhost:5000/api/services/${id}`,
+                    getApiUrl(`/api/services/${id}`),
                     { headers: { Authorization: `Bearer ${token}` } }
                 )
                 fetchServices()
@@ -119,144 +121,112 @@ function AdminServices() {
     }
 
     return (
-        <div className='admin-dashboard'>
-
-            <div className='admin-sidebar'>
-                <div className='admin-sidebar-header'>
-                    <h2>Miz <span>Jays</span></h2>
-                    <p>Admin Panel</p>
-                </div>
-                <nav className='admin-nav'>
-                    <Link to='/admin/dashboard' className='admin-nav-link'>
-                        Dashboard
-                    </Link>
-                    <Link to='/admin/services' className='admin-nav-link active'>
-                        Services
-                    </Link>
-                    <Link to='/admin/products' className='admin-nav-link'>
-                        Products
-                    </Link>
-                    <Link to='/admin/portfolio' className='admin-nav-link'>
-                        Portfolio
-                    </Link>
-                </nav>
+        <AdminLayout activePage='services' title='Services' subtitle='Manage service offerings from one place'>
+            <div className='admin-main-header'>
+                <div />
                 <button
-                    className='admin-logout-btn'
-                    onClick={() => {
-                        localStorage.removeItem('adminToken')
-                        navigate('/admin')
-                    }}
+                    className='admin-add-btn'
+                    onClick={() => setShowForm(true)}
                 >
-                    Logout
+                    + Add Service
                 </button>
             </div>
 
-            <div className='admin-main'>
-                <div className='admin-main-header'>
-                    <h1>Services</h1>
-                    <button
-                        className='admin-add-btn'
-                        onClick={() => setShowForm(true)}
-                    >
-                        + Add Service
-                    </button>
+            {showForm && (
+                <div className='admin-form-container'>
+                    <h2>{editingService ? 'Edit Service' : 'Add New Service'}</h2>
+                    <form onSubmit={handleSubmit} className='admin-form'>
+                        <div className='admin-form-group'>
+                            <label>Service Name</label>
+                            <input
+                                type='text'
+                                name='name'
+                                value={formData.name}
+                                onChange={handleInputChange}
+                                placeholder='e.g. Hair Styling'
+                                required
+                            />
+                        </div>
+                        <div className='admin-form-group'>
+                            <label>Description</label>
+                            <textarea
+                                name='description'
+                                value={formData.description}
+                                onChange={handleInputChange}
+                                placeholder='Describe the service...'
+                                required
+                            />
+                        </div>
+                        <div className='admin-form-group'>
+                            <label>Price (GH₵)</label>
+                            <input
+                                type='number'
+                                name='price'
+                                value={formData.price}
+                                onChange={handleInputChange}
+                                placeholder='e.g. 50'
+                                required
+                            />
+                        </div>
+                        <div className='admin-form-group'>
+                            <label>Category</label>
+                            <input
+                                type='text'
+                                name='category'
+                                value={formData.category}
+                                onChange={handleInputChange}
+                                placeholder='e.g. Hair'
+                                required
+                            />
+                        </div>
+                        <div className='admin-form-group'>
+                            <label>Image URL (Cloudinary)</label>
+                            <input
+                                type='text'
+                                name='image'
+                                value={formData.image}
+                                onChange={handleInputChange}
+                                placeholder='https://res.cloudinary.com/...'
+                            />
+                        </div>
+                        <div className='admin-form-buttons'>
+                            <button type='submit' className='admin-save-btn'>
+                                {editingService ? 'Update Service' : 'Save Service'}
+                            </button>
+                            <button
+                                type='button'
+                                className='admin-cancel-btn'
+                                onClick={handleCancel}
+                            >
+                                Cancel
+                            </button>
+                        </div>
+                    </form>
                 </div>
+            )}
 
-                {showForm && (
-                    <div className='admin-form-container'>
-                        <h2>{editingService ? 'Edit Service' : 'Add New Service'}</h2>
-                        <form onSubmit={handleSubmit} className='admin-form'>
-                            <div className='admin-form-group'>
-                                <label>Service Name</label>
-                                <input
-                                    type='text'
-                                    name='name'
-                                    value={formData.name}
-                                    onChange={handleInputChange}
-                                    placeholder='e.g. Hair Styling'
-                                    required
-                                />
-                            </div>
-                            <div className='admin-form-group'>
-                                <label>Description</label>
-                                <textarea
-                                    name='description'
-                                    value={formData.description}
-                                    onChange={handleInputChange}
-                                    placeholder='Describe the service...'
-                                    required
-                                />
-                            </div>
-                            <div className='admin-form-group'>
-                                <label>Price (GH₵)</label>
-                                <input
-                                    type='number'
-                                    name='price'
-                                    value={formData.price}
-                                    onChange={handleInputChange}
-                                    placeholder='e.g. 50'
-                                    required
-                                />
-                            </div>
-                            <div className='admin-form-group'>
-                                <label>Category</label>
-                                <input
-                                    type='text'
-                                    name='category'
-                                    value={formData.category}
-                                    onChange={handleInputChange}
-                                    placeholder='e.g. Hair'
-                                    required
-                                />
-                            </div>
-                            <div className='admin-form-group'>
-                                <label>Image URL (Cloudinary)</label>
-                                <input
-                                    type='text'
-                                    name='image'
-                                    value={formData.image}
-                                    onChange={handleInputChange}
-                                    placeholder='https://res.cloudinary.com/...'
-                                />
-                            </div>
-                            <div className='admin-form-buttons'>
-                                <button type='submit' className='admin-save-btn'>
-                                    {editingService ? 'Update Service' : 'Save Service'}
-                                </button>
-                                <button
-                                    type='button'
-                                    className='admin-cancel-btn'
-                                    onClick={handleCancel}
-                                >
-                                    Cancel
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                )}
-
-                {loading ? (
-                    <div className='admin-loading'>Loading services...</div>
-                ) : (
-                    <div className='admin-table-container'>
-                        <table className='admin-table'>
-                            <thead>
-                                <tr>
-                                    <th>Image</th>
-                                    <th>Name</th>
-                                    <th>Category</th>
-                                    <th>Price</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {services.map((service) => (
-                                    <tr key={service._id}>
-                                        <td>
-                                            {service.image ? (
-                                                <img
-                                                    src={service.image}
-                                                    alt={service.name}
+            {loading ? (
+                <div className='admin-loading'>Loading services...</div>
+            ) : (
+                <div className='admin-table-container'>
+                    <table className='admin-table'>
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Category</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {services.map((service) => (
+                                <tr key={service._id}>
+                                    <td>
+                                        {service.image ? (
+                                            <img
+                                                src={service.image}
+                                                alt={service.name}
                                                     className='admin-table-img'
                                                 />
                                             ) : (
@@ -286,8 +256,7 @@ function AdminServices() {
                         </table>
                     </div>
                 )}
-            </div>
-        </div>
+        </AdminLayout>
     )
 }
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './shop.css'
 import {BsTruck , BsPatchCheck , BsHeadset} from 'react-icons/bs'
+import { getApiUrl, getAssetUrl } from '../config/api'
 
 function Shop() {
     const [products, setProducts] = useState([])
@@ -14,7 +15,7 @@ function Shop() {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/products')
+                const response = await axios.get(getApiUrl('/api/products'))
                 setProducts(response.data)
                 setLoading(false)
             } catch (error) {
@@ -95,7 +96,7 @@ function Shop() {
                         >
                             <div className='product-card-img'>
                                 {product.image ? (
-                                    <img src={product.image} alt={product.name} />
+                                    <img src={getAssetUrl(product.image)} alt={product.name} />
                                 ) : (
                                     <div className='product-placeholder'></div>
                                 )}
@@ -133,7 +134,7 @@ function Shop() {
 
                             <div className='modal-img'>
                                 {selectedProduct.image ? (
-                                    <img src={selectedProduct.image} alt={selectedProduct.name} />
+                                    <img src={getAssetUrl(selectedProduct.image)} alt={selectedProduct.name} />
                                 ) : (
                                     <div className='product-placeholder'></div>
                                 )}

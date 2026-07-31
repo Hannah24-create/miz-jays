@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import axios from 'axios'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+import { getApiUrl } from '../config/api'
 import './AdminLogin.css'
 
 function AdminLogin() {
@@ -16,13 +17,14 @@ function AdminLogin() {
 
         try {
             const response = await axios.post(
-                'http://localhost:5000/api/auth/login',
+                getApiUrl('/api/auth/login'),
                 { password }
             )
             localStorage.setItem('adminToken', response.data.token)
             navigate('/admin/dashboard')
         } catch (error) {
-            setError('Invalid password — please try again')
+            const message = error?.response?.data?.message || 'Invalid password — please try again'
+            setError(message)
             setLoading(false)
         }
     }
@@ -61,6 +63,9 @@ function AdminLogin() {
                         {loading ? 'Logging in...' : 'Login'}
                     </button>
                 </form>
+                <div className='admin-forgot-link'>
+                    <Link to='/admin/forgot-password'>Forgot password?</Link>
+                </div>
 
             </div>
         </div>

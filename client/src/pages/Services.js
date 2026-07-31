@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import axios from 'axios'
+import { getApiUrl, getAssetUrl } from '../config/api'
 import './Services.css'
 
 function Services() {
@@ -10,7 +11,7 @@ function Services() {
     useEffect(() => {
         const fetchServices = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/services')
+                const response = await axios.get(getApiUrl('/api/services'))
                 setServices(response.data)
                 setLoading(false)
             } catch (error) {
@@ -40,9 +41,7 @@ function Services() {
             <div className='services-grid'>
                 {services.map((service) => {
                  
-                    const imageUrl = service.image?.startsWith('http') 
-                        ? service.image 
-                        : `http://localhost:5000${service.image}`
+                    const imageUrl = getAssetUrl(service.image)
                     return (
                     <div className='service-card' key={service._id}>
                         <div className='service-card-img'>

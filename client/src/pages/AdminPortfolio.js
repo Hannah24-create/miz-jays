@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { getApiUrl } from '../config/api'
+import AdminLayout from '../components/AdminLayout'
 import './Admin.css'
 
 function AdminPortfolio() {
@@ -20,11 +22,11 @@ function AdminPortfolio() {
             navigate('/admin')
         }
         fetchPortfolio()
-    }, [])
+    }, [navigate])
 
     const fetchPortfolio = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/portfolio')
+            const response = await axios.get(getApiUrl('/api/portfolio'))
             setPortfolio(response.data)
             setLoading(false)
         } catch (error) {
@@ -46,7 +48,7 @@ function AdminPortfolio() {
         try {
             const token = getToken()
             await axios.post(
-                'http://localhost:5000/api/portfolio',
+                getApiUrl('/api/portfolio'),
                 formData,
                 { headers: { Authorization: `Bearer ${token}` } }
             )
@@ -67,7 +69,7 @@ function AdminPortfolio() {
             try {
                 const token = getToken()
                 await axios.delete(
-                    `http://localhost:5000/api/portfolio/${id}`,
+                    getApiUrl(`/api/portfolio/${id}`),
                     { headers: { Authorization: `Bearer ${token}` } }
                 )
                 fetchPortfolio()
@@ -78,48 +80,16 @@ function AdminPortfolio() {
     }
 
     return (
-        <div className='admin-dashboard'>
-
-            <div className='admin-sidebar'>
-                <div className='admin-sidebar-header'>
-                    <h2>Miz <span>Jays</span></h2>
-                    <p>Admin Panel</p>
-                </div>
-                <nav className='admin-nav'>
-                    <Link to='/admin/dashboard' className='admin-nav-link'>
-                        Dashboard
-                    </Link>
-                    <Link to='/admin/services' className='admin-nav-link'>
-                        Services
-                    </Link>
-                    <Link to='/admin/products' className='admin-nav-link'>
-                        Products
-                    </Link>
-                    <Link to='/admin/portfolio' className='admin-nav-link active'>
-                        Portfolio
-                    </Link>
-                </nav>
+        <AdminLayout activePage='portfolio' title='Portfolio' subtitle='Add or remove portfolio items'>
+            <div className='admin-main-header'>
+                <div />
                 <button
-                    className='admin-logout-btn'
-                    onClick={() => {
-                        localStorage.removeItem('adminToken')
-                        navigate('/admin')
-                    }}
+                    className='admin-add-btn'
+                    onClick={() => setShowForm(true)}
                 >
-                    Logout
+                    + Add Media
                 </button>
             </div>
-
-            <div className='admin-main'>
-                <div className='admin-main-header'>
-                    <h1>Portfolio</h1>
-                    <button
-                        className='admin-add-btn'
-                        onClick={() => setShowForm(true)}
-                    >
-                        + Add Media
-                    </button>
-                </div>
 
                 {showForm && (
                     <div className='admin-form-container'>
@@ -208,8 +178,7 @@ function AdminPortfolio() {
                         ))}
                     </div>
                 )}
-            </div>
-        </div>
+        </AdminLayout>
     )
 }
 

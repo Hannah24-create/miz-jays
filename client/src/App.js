@@ -12,10 +12,12 @@ import AOS from 'aos'
 import 'aos/dist/aos.css'
 import './App.css'
 import AdminLogin from './pages/AdminLogin'
+import AdminForgotPassword from './pages/AdminForgotPassword'
 import AdminDashboard from './pages/AdminDashboard'
 import AdminServices from './pages/AdminServices'
 import AdminProducts from './pages/AdminProducts'
 import AdminPortfolio from './pages/AdminPortfolio'
+import ProtectedRoute from './components/ProtectedRoute'
 
 function App() {
   const [darkMode, setDarkMode] = useState(false)
@@ -38,19 +40,35 @@ function App() {
         <Navbar darkMode={darkMode} toggleTheme={toggleTheme} />
         <main className='main-content'>
             <Routes>
-               <Route path='/' element={<Home />} />
+            <Route path='/' element={<Home />} />
     <Route path='/services' element={<Services />} />
     <Route path='/services/:id' element={<ServiceDetail />} />
     <Route path='/about' element={<About />} />
     <Route path='/portfolio' element={<Portfolio />} />
     <Route path='/shop' element={<Shop />} />
-
-    {/* Admin Routes */}
-    <Route path='/admin' element={<AdminLogin />} />
-    <Route path='/admin/dashboard' element={<AdminDashboard />} />
-    <Route path='/admin/services' element={<AdminServices />} />
-    <Route path='/admin/products' element={<AdminProducts />} />
-    <Route path='/admin/portfolio' element={<AdminPortfolio />} />
+{/* Admin Routes */}
+<Route path='/admin' element={<AdminLogin />} />
+<Route path='/admin/forgot-password' element={<AdminForgotPassword />} />
+<Route path='/admin/dashboard' element={
+    <ProtectedRoute>
+        <AdminDashboard />
+    </ProtectedRoute>
+} />
+<Route path='/admin/services' element={
+    <ProtectedRoute>
+        <AdminServices />
+    </ProtectedRoute>
+} />
+<Route path='/admin/products' element={
+    <ProtectedRoute>
+        <AdminProducts />
+    </ProtectedRoute>
+} />
+<Route path='/admin/portfolio' element={
+    <ProtectedRoute>
+        <AdminPortfolio />
+    </ProtectedRoute>
+} />
             </Routes>
         </main>
         <Footer />

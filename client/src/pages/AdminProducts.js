@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { getApiUrl } from '../config/api'
+import AdminLayout from '../components/AdminLayout'
 import './Admin.css'
 
 function AdminProducts() {
@@ -31,7 +33,7 @@ function AdminProducts() {
 
     const fetchProducts = async () => {
         try {
-            const response = await axios.get('http://localhost:5000/api/products')
+            const response = await axios.get(getApiUrl('/api/products'))
             setProducts(response.data)
             setLoading(false)
         } catch (error) {
@@ -57,13 +59,13 @@ function AdminProducts() {
 
             if (editingProduct) {
                 await axios.put(
-                    `http://localhost:5000/api/products/${editingProduct._id}`,
+                    getApiUrl(`/api/products/${editingProduct._id}`),
                     formData,
                     { headers }
                 )
             } else {
                 await axios.post(
-                    'http://localhost:5000/api/products',
+                    getApiUrl('/api/products'),
                     formData,
                     { headers }
                 )
@@ -105,7 +107,7 @@ function AdminProducts() {
             try {
                 const token = getToken()
                 await axios.delete(
-                    `http://localhost:5000/api/products/${id}`,
+                    getApiUrl(`/api/products/${id}`),
                     { headers: { Authorization: `Bearer ${token}` } }
                 )
                 fetchProducts()
@@ -130,48 +132,16 @@ function AdminProducts() {
     }
 
     return (
-        <div className='admin-dashboard'>
-
-            <div className='admin-sidebar'>
-                <div className='admin-sidebar-header'>
-                    <h2>Miz <span>Jays</span></h2>
-                    <p>Admin Panel</p>
-                </div>
-                <nav className='admin-nav'>
-                    <Link to='/admin/dashboard' className='admin-nav-link'>
-                        Dashboard
-                    </Link>
-                    <Link to='/admin/services' className='admin-nav-link'>
-                        Services
-                    </Link>
-                    <Link to='/admin/products' className='admin-nav-link active'>
-                        Products
-                    </Link>
-                    <Link to='/admin/portfolio' className='admin-nav-link'>
-                        Portfolio
-                    </Link>
-                </nav>
+        <AdminLayout activePage='products' title='Products' subtitle='Manage store products quickly'>
+            <div className='admin-main-header'>
+                <div />
                 <button
-                    className='admin-logout-btn'
-                    onClick={() => {
-                        localStorage.removeItem('adminToken')
-                        navigate('/admin')
-                    }}
+                    className='admin-add-btn'
+                    onClick={() => setShowForm(true)}
                 >
-                    Logout
+                    + Add Product
                 </button>
             </div>
-
-            <div className='admin-main'>
-                <div className='admin-main-header'>
-                    <h1>Products</h1>
-                    <button
-                        className='admin-add-btn'
-                        onClick={() => setShowForm(true)}
-                    >
-                        + Add Product
-                    </button>
-                </div>
 
                 {showForm && (
                     <div className='admin-form-container'>
@@ -329,8 +299,7 @@ function AdminProducts() {
                         </table>
                     </div>
                 )}
-            </div>
-        </div>
+        </AdminLayout>
     )
 }
 
