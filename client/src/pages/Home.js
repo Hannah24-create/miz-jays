@@ -8,6 +8,7 @@ import { BsCalendarCheck, BsEmojiSmile } from 'react-icons/bs'
 import { BiHome } from 'react-icons/bi'
 import './Home.css'
 
+
 function Home() {
     const [services, setServices] = useState([])
 
