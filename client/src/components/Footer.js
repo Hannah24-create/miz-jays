@@ -40,7 +40,7 @@ function Footer() {
             </div>
 
             <div className='footer-copy'>
-                <p>© 2025 Miz Jays. All rights reserved.</p>
+                <p>© {new Date().getFullYear()} Miz Jays. All rights reserved.</p>
                 <p className='footer-tag'>beauty with class...</p>
             </div>
 
